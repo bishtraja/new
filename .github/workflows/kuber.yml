@@ -30,15 +30,14 @@ jobs:
           aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
           aws configure set region $AWS_DEFAULT_REGION
-      - name: update kubeconfig
-        run: |
-          aws eks update-kubeconfig --region us-east-1 --name test
+#       - name: update kubeconfig
+#         run: |
+#           aws eks update-kubeconfig --region us-east-1 --name test
       
      
-      - name: check pods
-        run: |
-          kubectl get po
-          
-      - name: deploy pod
-        run: |
-          cat ~/.kube/config
+      - name: deploy to cluster
+        uses: wahyd4/kubectl-helm-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: kubectl get po
