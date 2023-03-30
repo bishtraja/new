@@ -1,0 +1,40 @@
+name: Kubectl Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Check kubectl version
+        run: kubectl version --client
+        
+      - name: Retrieve kubeconfig secret
+        run: |
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > kubeconfig.yaml
+        
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          sudo pip3 install awscli
+        
+      - name: Verify AWS CLI installation
+        run: aws --version
+ 
+      - uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.26.0' # default is latest stable
+        id: install
+ 
+      - name: Get list of pods
+        env:
+          KUBECONFIG: ./kubeconfig.yaml
+        run: |
+          kubectl get pods
