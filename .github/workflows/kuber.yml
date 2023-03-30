@@ -21,7 +21,7 @@ jobs:
           python-version: '3.8'
           
       - name: Install AWS CLI
-        run: pip install awscli --upgrade --user
+        run: sudo apt-get update && sudo apt-get install -y awscli
         
       - name: Verify AWS CLI installation
         run: aws --version
@@ -31,7 +31,6 @@ jobs:
           version: 'v1.26.0' # default is latest stable
         id: install
  
-          
       - name: Configure AWS credentials
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -41,14 +40,11 @@ jobs:
           aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
           aws configure set region $AWS_DEFAULT_REGION
-#       - name: update kubeconfig
-#         run: |
-#           aws eks update-kubeconfig --region us-east-1 --name test
       
-     
-      - name: deploy to cluster
+      - name: Deploy to cluster
         uses: wahyd4/kubectl-helm-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         with:
           args: kubectl get po
+
