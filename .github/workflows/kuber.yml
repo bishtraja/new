@@ -23,6 +23,9 @@ jobs:
       - name: Install AWS CLI
         run: sudo apt-get update && sudo apt-get install -y awscli
         
+      - name: Add AWS CLI to PATH
+        run: echo "${HOME}/.local/bin" >> $GITHUB_PATH
+ 
       - name: Verify AWS CLI installation
         run: aws --version
  
@@ -47,4 +50,3 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         with:
           args: kubectl get po
-
