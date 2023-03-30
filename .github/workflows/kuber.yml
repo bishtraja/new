@@ -21,11 +21,10 @@ jobs:
           python-version: '3.8'
           
       - name: Install AWS CLI
-        run: sudo apt-get update && sudo apt-get install -y awscli
+        run: |
+        sudo apt-get update
+        sudo apt-get install -y awscli
         
-      - name: Add AWS CLI to PATH
-        run: echo "${HOME}/.local/bin" >> $GITHUB_PATH
- 
       - name: Verify AWS CLI installation
         run: aws --version
  
@@ -34,19 +33,22 @@ jobs:
           version: 'v1.26.0' # default is latest stable
         id: install
  
+          
       - name: Configure AWS credentials
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-          aws configure set region $AWS_DEFAULT_REGION
+          sudo $(which aws) configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+          sudo $(which aws) configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+          sudo $(which aws) configure set region $AWS_DEFAULT_REGION
       
-      - name: Deploy to cluster
+     
+      - name: deploy to cluster
         uses: wahyd4/kubectl-helm-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         with:
           args: kubectl get po
+
