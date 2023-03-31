@@ -38,7 +38,8 @@ jobs:
           kubectl get pods
           
       - name: helm command run
+        env:
+          KUBECONFIG: ./kubeconfig.yaml
         uses: WyriHaximus/github-action-helm3@v3
         with:
             exec: helm ls
-            kubeconfig: ./kubeconfig.yaml
