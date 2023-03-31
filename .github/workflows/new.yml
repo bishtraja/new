@@ -1,4 +1,4 @@
-name: helm deployement
+name: kubernetes deployement
 
 on:
   workflow_dispatch:
