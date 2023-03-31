@@ -1,4 +1,4 @@
-name: Kubectl Action
+name: helm deployement
 
 on:
   workflow_dispatch:
