@@ -25,5 +25,5 @@ jobs:
     - name: kubeconfing
       shell: bash
       run: |
-          aws eks update-kubeconfig --name test --region us-east-1
-          kubectl get po
+          aws s3 ls
+    
