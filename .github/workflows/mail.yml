@@ -1,0 +1,23 @@
+name: GitHub Actions Demo
+on: 
+  workflow_dispatch:
+  
+ 
+ jobs:
+ sending-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3.6.0
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: vijaybisht
+          password: ${{secrets.APPPASSWD}}
+          subject: Message from github actions.
+          to: vijaybisht0103@gmail.com
+          from: vijaybishtrkt@gmail.com
+          secure: true
+          body: workflow for ${{github.repository}} completed successfully!
