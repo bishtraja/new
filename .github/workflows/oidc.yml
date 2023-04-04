@@ -22,7 +22,7 @@ jobs:
         role-to-assume: arn:aws:iam::606436546135:role/githubactionrole
         aws-region: us-east-1
 
-   - name: kubeconfing
+    - name: kubeconfing
       shell: bash
       run: |
           aws eks update-kubeconfig --name test --region us-east-1
