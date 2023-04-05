@@ -8,6 +8,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Send email
+        if: ${{ always() }}
         uses: dawidd6/action-send-mail@v3.6.0
         with:
           server_address: smtp.gmail.com
