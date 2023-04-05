@@ -18,4 +18,4 @@ jobs:
           to: vijaybisht0103@gmail.com,vijay.bisht@opstree.com
           from: vijaybishtrkt@gmail.com
           secure: true
-          body: workflow for ${{github.repository}} is {{job.status}}!
+          body: workflow for ${{github.repository}} is ${{job.status}}!
