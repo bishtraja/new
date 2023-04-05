@@ -11,6 +11,14 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       
+      - name: Generate logs
+        run: |
+          echo "This is a log message" > path/to/logs/log.txt
+          
+      - name: Check workspace directory
+        run: |
+          ls -la
+      
       - name: Upload logs
         uses: actions/upload-artifact@v2
         with:
