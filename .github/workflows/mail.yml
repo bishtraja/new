@@ -25,19 +25,18 @@ jobs:
           path: ${{ github.workspace }}/path/to/logs
         
           
-#       - name: Send email
-#         uses: dawidd6/action-send-mail@v3.6.0
-#         with:
-#           server_address: smtp.gmail.com
-#           server_port: 465
-#           username: vijaybishtrkt
-#           password: ${{secrets.APPPASSWD}}
-#           subject: Message from github actions.
-#           to: vijaybisht0103@gmail.com,vijay.bisht@opstree.com
-#           from: vijaybishtrkt@gmail.com
-#           secure: true
-#           body: |
-#            'Click here to view the workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
-#             workflow for ${{ github.repository }} is ${{ job.status }}!
-#           attachments: |
-#             path/to/logs
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3.6.0
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: vijaybishtrkt
+          password: ${{secrets.APPPASSWD}}
+          subject: Message from github actions.
+          to: vijaybisht0103@gmail.com,shivani.singh@opstree.com
+          from: vijaybishtrkt@gmail.com
+          secure: true
+          body: |
+           'Click here to view the workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+            workflow for ${{ github.repository }} is ${{ job.status }}!
+          
