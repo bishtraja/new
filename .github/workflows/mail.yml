@@ -14,7 +14,9 @@ jobs:
       - name: Print working directory
         run: |
           pwd
-          ls /home/runner/work/new/new/path/to/logs
+          cd /home/runner/work/new/new
+          ls 
+
           
       - name: Upload logs
         uses: actions/upload-artifact@v2
