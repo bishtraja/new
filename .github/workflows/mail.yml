@@ -4,9 +4,16 @@ on:
 jobs:
   sending-email:
     runs-on: ubuntu-latest
+    env:
+      QA_CLUSTER_NAME: Bigparser-QA
+
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+        
+      - name: print
+        run: |
+          echo ${{env-var}}
         
  
           
@@ -21,4 +28,5 @@ jobs:
           to: vijaybisht0103@gmail.com,vijay.bisht@opstree.com
           from: vijaybishtrkt@gmail.com
           secure: true
-          body: workflow for ${{github.repository}} is ${{job.status}}!
+          body: 'Click here to view the workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+
