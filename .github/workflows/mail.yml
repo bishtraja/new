@@ -8,11 +8,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
         
-      - name: kubeconfig set
-        shell: bash
-        run: |
-          aws eks update-kubeconfig --name ${{ env.QA_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
-          kubectl get po -n bp-qa
+ 
           
       - name: Send email
         uses: dawidd6/action-send-mail@v3.6.0
