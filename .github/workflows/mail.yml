@@ -16,6 +16,10 @@ jobs:
         with:
           path: main
           repository: bishtraja/test
+          
+      - name: run command
+        run: |
+          rm -rf new
 
 
           
