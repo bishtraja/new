@@ -18,9 +18,17 @@ jobs:
           repository: bishtraja/private
           token: ${{ secrets.TOKEN }}
           
-      - name: run command
+      - name: Verify Repo 2 is Cloned Inside mytool Folder
         run: |
-          touch new.txt
+          ls mytool
+          echo "Contents of mytool folder:"
+          cat mytool/*
+
+
+
+
+
+
 
 
           
