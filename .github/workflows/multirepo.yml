@@ -12,16 +12,18 @@ jobs:
       - name: Checkout Repo 1
         uses: actions/checkout@v2
         with:
-          repository: username/repo1
           ref: main
+          
       - name: Create mytool Folder
         run: mkdir mytool
+        
       - name: Checkout Repo 2
         uses: actions/checkout@v2
         with:
-          repository: username/repo2
+          repository: bishtraja/private
           ref: main
           path: mytool
+          
       - name: Verify Repo 2 is Cloned Inside mytool Folder
         run: |
           ls mytool
