@@ -23,6 +23,7 @@ jobs:
           repository: bishtraja/private
           ref: main
           path: mytool
+          token: ${{ secrets.TOKEN }}
           
       - name: Verify Repo 2 is Cloned Inside mytool Folder
         run: |
