@@ -18,12 +18,12 @@ jobs:
         with:
           server_address: email-smtp.us-east-1.amazonaws.com
           server_port: 587
-          username: AKIAY2MTPKZLRTSZDKMG
-          password: BEgT1QwoQRdruuQz+237GyyCdyIwc5IKMH6WXbzZ6Y4b
-
+          auth_method: login
+          auth_username: AKIAY2MTPKZLRTSZDKMG
+          auth_password: BEgT1QwoQRdruuQz+237GyyCdyIwc5IKMH6WXbzZ6Y4b
           subject: ${{ github.repository }}-Build-${{ github.run_number }} is ${{ job.status }} :QA Env
           to: vijaybisht0103@gmail.com
-          from: vijaybishtrkt@gmail.com
+          from: '"Vijay" <vijaybishtrkt@gmail.com>'
 #            secure: true
           body:  |
             'Click here to view the workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'       
