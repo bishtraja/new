@@ -1,0 +1,30 @@
+name: GitHub Actions Demo
+on: 
+  workflow_dispatch:
+jobs:
+  sending-email:
+    runs-on: ubuntu-latest
+    env:
+      QA_CLUSTER_NAME: Bigparser-QA
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+
+      - name: send email
+        if: ${{ always() }}
+        uses: dawidd6/action-send-mail@v3.6.0
+        with:
+          server_address: email-smtp.us-east-1.amazonaws.com
+          server_port: 587
+          username: AKIAY2MTPKZLRTSZDKMG
+          password: BEgT1QwoQRdruuQz+237GyyCdyIwc5IKMH6WXbzZ6Y4b
+
+          subject: ${{ github.repository }}-Build-${{ github.run_number }} is ${{ job.status }} :QA Env
+          to: vijaybisht0103@gmail.com
+          from: vijaybishtrkt@gmail.com
+#            secure: true
+          body:  |
+            'Click here to view the workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'       
+            Job # ${{ github.run_number }}  of workflow "${{ github.workflow }}" of ${{ github.repository }}  is ${{ job.status }}.
