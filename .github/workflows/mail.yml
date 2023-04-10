@@ -11,11 +11,12 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       
-      - name: Print working directory
-        run: |
-          pwd
-          cd /home/runner/work/new/new
-          ls 
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: main
+          repository: bishtraja/test
+
 
           
       - name: Upload logs
@@ -25,18 +26,18 @@ jobs:
           path: ${{ github.workspace }}/path/to/logs
         
           
-      - name: Send email
-        uses: dawidd6/action-send-mail@v3.6.0
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: vijaybishtrkt
-          password: ${{secrets.APPPASSWD}}
-          subject: Message from github actions.
-          to: vijaybisht0103@gmail.com,shivani.singh@opstree.com
-          from: vijaybishtrkt@gmail.com
-          secure: true
-          body: |
-           'Click here to view the workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
-            workflow for ${{ github.repository }} is ${{ job.status }}!
+#       - name: Send email
+#         uses: dawidd6/action-send-mail@v3.6.0
+#         with:
+#           server_address: smtp.gmail.com
+#           server_port: 465
+#           username: vijaybishtrkt
+#           password: ${{secrets.APPPASSWD}}
+#           subject: Message from github actions.
+#           to: vijaybisht0103@gmail.com,shivani.singh@opstree.com
+#           from: vijaybishtrkt@gmail.com
+#           secure: true
+#           body: |
+#            'Click here to view the workflow run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+#             workflow for ${{ github.repository }} is ${{ job.status }}!
           
