@@ -22,8 +22,8 @@ jobs:
           
       - name: Install AWS CLI
         run: |
-        sudo apt-get update
-        sudo apt-get install -y awscli
+          sudo apt-get update
+          sudo apt-get install -y awscli
         
       - name: Verify AWS CLI installation
         run: aws --version
