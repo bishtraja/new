@@ -2,6 +2,9 @@ name: helm Action
 
 on:
   workflow_dispatch:
+  push:
+   branches:
+     - new
 
 jobs:
   deploy:
