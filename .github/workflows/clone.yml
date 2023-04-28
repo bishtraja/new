@@ -11,3 +11,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: test
+          
+      - name: list all files and dir
+        run : ls -al
