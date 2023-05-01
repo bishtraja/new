@@ -10,6 +10,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+        
+      - name: Get current time
+        id: current_time
+        run: echo "::set-output name=current_time::$(date -u +'%Y-%m-%d %H:%M:%S UTC')"
 
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
@@ -22,7 +26,7 @@ jobs:
           body: |
             Workflow URL: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}
             Workflow Status: ${{ job.status }}
-            Workflow Date: ${{ github.event.head_commit.timestamp }}
+            Workflow Date: ${{ env.CURRENT_TIME }}
             Workflow Trigger: ${{ github.event_name }}
           to: vijaybisht0103@gmail.com
           from: vijaybishtrkt@gmail.com
