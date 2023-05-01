@@ -20,5 +20,5 @@ jobs:
         from: vijaybishtrkt@gmail.com
         subject: My email subject
         body: |
-          $(file email-template.html)
+           $(echo "$(cat email-template.html)")
         to: vijaybisht0103@gmail.com
