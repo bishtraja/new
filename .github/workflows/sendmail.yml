@@ -1,4 +1,5 @@
 name: send mail
+
 on: 
   workflow_dispatch:
 
@@ -17,6 +18,9 @@ jobs:
         id: current_time
         run: |
           echo "::set-output name=current_time::$(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+        
+      - name: Set current time
+        run: echo "CURRENT_TIME=${{ steps.current_time.outputs.current_time }}" >> $GITHUB_ENV
         
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
