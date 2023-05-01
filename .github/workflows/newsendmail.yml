@@ -19,5 +19,5 @@ jobs:
         password: ${{ secrets.APPPASSWD }}
         from: vijaybishtrkt@gmail.com
         subject: My email subject
-        body: $(cat template.html)
+        body: $(cat email-template.html)
         to: vijaybisht0103@gmail.com
