@@ -1,5 +1,4 @@
-name: aws smtp
-
+name: send mail
 on: 
   workflow_dispatch:
 
