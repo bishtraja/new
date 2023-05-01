@@ -1,0 +1,29 @@
+name: aws smtp
+on: 
+  workflow_dispatch:
+jobs:
+  sending-email:
+    runs-on: ubuntu-latest
+    env:
+      QA_CLUSTER_NAME: Bigparser-QA
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: vijaybishtrkt
+          password: ${{secrets.APPPASSWD}}
+          subject: send mail
+          body: |
+            Workflow URL: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}
+            Workflow Status: ${{ job.status }}
+            Workflow Date: ${{ github.event.head_commit.timestamp }}
+            Workflow Trigger: ${{ github.event_name }}
+          to: vijaybisht0103@gmail.com
+          from: vijaybishtrkt@gmail.com
+      
