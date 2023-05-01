@@ -1,4 +1,4 @@
-name: aws smtp
+name: send email template
 on: 
   workflow_dispatch:
 jobs:
