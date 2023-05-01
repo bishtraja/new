@@ -1,0 +1,21 @@
+name: Merge qa into disaster_recovery
+
+on:
+ workflow_dispatch:
+
+jobs:
+  merge:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          ref: new
+      - name: Merge qa -> disaster_recovery
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: test
+          target_branch: disaster_recovery
+          github_token: ${{ secrets.TOKEN }}
+              
