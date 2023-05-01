@@ -24,3 +24,5 @@ jobs:
         subject: My email subject
         body: ${{ steps.email-template.outputs.content }}
         to: vijaybisht0103@gmail.com
+        content_type: text/html
+
