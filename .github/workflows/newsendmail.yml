@@ -1,23 +1,24 @@
 name: Send Email Notification
 
 on: 
-  workflow_dispatch:
+ workflow_dispatch:
 
 jobs:
   send-email:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Generate Email Body
-      uses: juliangruber/handlebars-action@v1.x
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Render Email Template
+      uses: gohugoio/hugo-action@v2
       with:
-        template: 'email-template.html'
-        data: |
-          {
-            "status": "${{ job.status }}",
-            "build_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          }
-      id: generate-email
+        hugo_args: --templateMetrics --templateMetricsHints
+        buildDrafts: false
+        minify: true
+        src: 'email-template.html'
+        destination: 'email-template'
 
     - name: Send Email
       uses: dawidd6/action-send-mail@v2
@@ -27,6 +28,7 @@ jobs:
         username: vijaybishtrkt
         password: ${{secrets.APPPASSWD}}
         subject: GitHub Actions Notification
-        body: ${{ steps.generate-email.outputs.compiled }}
+        body: ${{ steps.render-email-template.outputs.content }}
         to: vijaybisht0103@gmail.com
         from: vijaybishtrkt@gmail.com
+
