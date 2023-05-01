@@ -1,16 +1,19 @@
-name: send email template
+name: send mail 
+
 on: 
   workflow_dispatch:
+
 jobs:
   sending-email:
     runs-on: ubuntu-latest
     env:
       QA_CLUSTER_NAME: Bigparser-QA
+      CURRENT_TIME: ${{ steps.current_time.outputs.current_time }}
 
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-        
+
       - name: Get current time
         id: current_time
         run: echo "::set-output name=current_time::$(date -u +'%Y-%m-%d %H:%M:%S UTC')"
@@ -30,4 +33,5 @@ jobs:
             Workflow Trigger: ${{ github.event_name }}
           to: vijaybisht0103@gmail.com
           from: vijaybishtrkt@gmail.com
+
       
