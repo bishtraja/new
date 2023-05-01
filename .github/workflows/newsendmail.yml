@@ -1,34 +1,23 @@
-name: Send Email Notification
+name: Send email to me
 
-on: 
- workflow_dispatch:
+on:
+  workflow_dispatch:
 
 jobs:
   send-email:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Code
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Render Email Template
-      uses: gohugoio/hugo-action@v2
-      with:
-        hugo_args: --templateMetrics --templateMetricsHints
-        buildDrafts: false
-        minify: true
-        src: 'email-template.html'
-        destination: 'email-template'
-
-    - name: Send Email
+    - name: Send email
       uses: dawidd6/action-send-mail@v2
       with:
         server_address: smtp.gmail.com
-        server_port: 465
+        server_port: 587
         username: vijaybishtrkt
-        password: ${{secrets.APPPASSWD}}
-        subject: GitHub Actions Notification
-        body: ${{ steps.render-email-template.outputs.content }}
-        to: vijaybisht0103@gmail.com
+        password: ${{ secrets.APPPASSWD }}
         from: vijaybishtrkt@gmail.com
-
+        subject: My email subject
+        body: $(cat template.html)
+        to: vijaybisht0103@gmail.com
