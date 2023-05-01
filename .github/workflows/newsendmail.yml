@@ -1,0 +1,32 @@
+name: Send Email Notification
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Generate Email Body
+      uses: juliangruber/handlebars-action@v1.x
+      with:
+        template: 'email-template.html'
+        data: |
+          {
+            "status": "${{ job.status }}",
+            "build_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+      id: generate-email
+
+    - name: Send Email
+      uses: dawidd6/action-send-mail@v2
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: GitHub Actions Notification
+        body: ${{ steps.generate-email.outputs.compiled }}
+        to: user@example.com
+        from: user@example.com
