@@ -1,4 +1,4 @@
-name: send mail 
+name: mail send
 
 on: 
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
       - name: Get current time
         id: current_time
         run: echo "::set-output name=current_time::$(date -u +'%Y-%m-%d %H:%M:%S UTC')"
-
+        
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
         with:
@@ -33,5 +33,6 @@ jobs:
             Workflow Trigger: ${{ github.event_name }}
           to: vijaybisht0103@gmail.com
           from: vijaybishtrkt@gmail.com
+
 
       
