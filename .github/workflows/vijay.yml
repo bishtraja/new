@@ -25,7 +25,6 @@ jobs:
           python render_template.py
 
       - name: Send Email
-        id: send_email
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -37,18 +36,12 @@ jobs:
             Workflow URL: ${GITHUB_SERVER_URL}/${{ github.event.repository }}/actions/runs/${{ github.run_id }}
             Workflow Trigger: ${{ github.event_name }}
             Application health check URL: http://Qa.bigparser.com/api/v2/test_devops
-            ${{ github.workflow }} - Successful
+            {{ github.workflow }} - Successful
             GitHub Repository: ${{ env.GITHUB_REPOSITORY }}
             Github Actions Build Number: ${{ github.run_number }}
             GitHub Branch Name: ${{ github.ref }}
             Commit Message: ${{ github.event.head_commit.message }}
-            Status: ${{ steps.send_email.status }}
           from: vijaybishtrkt@gmail.com
           to: vijaybishtrkt@gmail.com
-
-
-
-
-
 
 
