@@ -20,6 +20,6 @@ jobs:
         to: vijaybisht0103@gmail.com
         from: vijaybishtrkt@gmail.com
         subject: 'Test email with HTML body'
-        body: '<h1 style="color: red;">Hello, World!</h1><p style="color: blue;">This is an email with an HTML body.</p>'
+        body: file://new.html
         content_type: 'text/html'
 
