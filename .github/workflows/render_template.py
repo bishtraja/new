@@ -6,7 +6,7 @@ with open("email_template.html", "r") as f:
 
 # Render the template with the desired variables
 rendered_template = template.render(
-    job_status=os.environ["JOB_STATUS"],
+    job_status=os.environ["JOBSTATUS"],
     github_repository=os.environ["GITHUB_REPOSITORY"],
     github_run_number=os.environ["GITHUB_RUN_NUMBER"],
     github_ref=os.environ["GITHUB_REF"],
@@ -16,3 +16,4 @@ rendered_template = template.render(
 # Write the rendered template back to the file
 with open("email_template.html", "w") as f:
     f.write(rendered_template)
+
