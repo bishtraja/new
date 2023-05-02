@@ -1,0 +1,23 @@
+name: Send Email with HTML Body
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Send email
+      uses: jamesgroat/send-email-action@v1
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: vijaybishtrkt@gmail.com
+        password: ${{ secrets.APPPASSWD }}
+        to: vijaybisht0103@gmail.com
+        from: vijaybishtrkt@gmail.com
+        subject: 'Test email with HTML body'
+        body: '<h1>Hello, World!</h1><p>This is an email with an HTML body.</p>'
