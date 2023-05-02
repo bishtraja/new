@@ -20,7 +20,8 @@ jobs:
         to: vijaybisht0103@gmail.com
         from: vijaybishtrkt@gmail.com
         subject: 'Test email with HTML body'
-        html_body: file://email-template.html
+        html_body: |
+          body: "<h1>Hello, World!</h1><p>This is an email with an HTML body.</p>"
         content_type: html
         convert_markdown: true
 
