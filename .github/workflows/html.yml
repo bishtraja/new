@@ -15,15 +15,15 @@ jobs:
         server_port: 587
         username: vijaybishtrkt@gmail.com
         password: ${{ secrets.APPPASSWD }}
-        to: vijaybisht0103@gmail.com
+        to: vijaybisht0103@gmail.com,shivani.singh@opstree.com
         from: vijaybishtrkt@gmail.com
         subject: 'Test email with HTML body'
         html_body: |
             <p>
-              Workflow URL: <a href="${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}">${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}</a>
-              <br>
               <h2>Workflow Status: ${{ job.status }}</h2>
               <br>
+              Workflow URL: <a href="${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}">${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}</a>
+              <br>    
               Workflow Trigger: ${{ github.event_name }}
             </p>
 
