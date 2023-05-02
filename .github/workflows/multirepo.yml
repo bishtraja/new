@@ -1,8 +1,6 @@
 name: Checkout Two Repositories and Verify
 
 on:
-  push:
-    branches:
     
 
 jobs:
