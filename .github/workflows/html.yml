@@ -22,4 +22,5 @@ jobs:
         subject: 'Test email with HTML body'
         body: file://email-template.html
         content_type: 'text/html'
+        convert_markdown: true
 
