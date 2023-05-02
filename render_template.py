@@ -1,7 +1,7 @@
 import os
 from jinja2 import Template
 
-with open("email_template.html", "r") as f:
+with open("email-template.html", "r") as f:
     template = Template(f.read())
 
 # Render the template with the desired variables
@@ -14,5 +14,5 @@ rendered_template = template.render(
 )
 
 # Write the rendered template back to the file
-with open("email_template.html", "w") as f:
+with open("email-template.html", "w") as f:
     f.write(rendered_template)
