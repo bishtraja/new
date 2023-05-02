@@ -1,7 +1,7 @@
 import os
 from jinja2 import Environment, FileSystemLoader
 
-TEMPLATE_FILE = "email_template.html"
+TEMPLATE_FILE = "email-template.html"
 
 templateLoader = FileSystemLoader(searchpath="./")
 templateEnv = Environment(loader=templateLoader)
