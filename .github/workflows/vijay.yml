@@ -16,6 +16,9 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+          
+      - name: Install Jinja2
+        run: pip install jinja2
 
       - name: Set Job Status
         run: |
