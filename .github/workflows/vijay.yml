@@ -17,11 +17,20 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install Jinja2
-        run: pip install jinja2
+      - name: Set Job Status
+        run: |
+          echo "export JOB_STATUS=Success" >> $GITHUB_ENV
 
       - name: Render HTML Email Template
         run: |
+          echo "export GITHUB_REPOSITORY=$GITHUB_REPOSITORY" >> $GITHUB_ENV
+          echo "export GITHUB_RUN_NUMBER=$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "export GITHUB_REF=$GITHUB_REF" >> $GITHUB_ENV
+          echo "export GITHUB_HEAD_REF=$GITHUB_HEAD_REF" >> $GITHUB_ENV
+          echo "export GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME" >> $GITHUB_ENV
+          echo "export GITHUB_SHA=$GITHUB_SHA" >> $GITHUB_ENV
+          echo "export GITHUB_ACTOR=$GITHUB_ACTOR" >> $GITHUB_ENV
+          echo "export GITHUB_WORKFLOW=$GITHUB_WORKFLOW" >> $GITHUB_ENV
           python render_template.py
 
       - name: Send Email
