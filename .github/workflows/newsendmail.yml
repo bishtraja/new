@@ -1,27 +1,31 @@
 name: Send email to me
 
-on: 
- workflow_dispatch:
-
+on:
+  workflow_dispatch:
 jobs:
-  send_email:
+  send-email:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Set up SMTP server
+
+
+    - name: Send email
       uses: dawidd6/action-send-mail@v2
       with:
         server_address: smtp.gmail.com
-        server_port: 465
+        server_port: 587
         username: vijaybishtrkt
-        password: ${{secrets.APPPASSWD}}
+        password: ${{ secrets.APPPASSWD }}
         from: vijaybishtrkt@gmail.com
+        subject: My email subject
+        body: file://email-template.html
         to: vijaybisht0103@gmail.com
-        subject: Workflow run ${GITHUB_RUN_NUMBER} result
-        body: |
-          <p><a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">(Click above to view the workflow run)</a></p>
-          <p>Job # ${GITHUB_RUN_NUMBER} of workflow "${{ github.workflow }}" of ${{ github.repository }} is ${{ job.status }}.</p>
- 
+        content_type: text/html
+        convert_markdown: true
         
-
+    - name: Substitute environment variables
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install gettext
+        envsubst < email-template.html > email-template-envsubst.html
