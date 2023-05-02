@@ -21,5 +21,5 @@ jobs:
         subject: My email subject
         html_body: file://email-template.html
         to: vijaybisht0103@gmail.com
-        content_type: text/html
+        #content_type: text/html
 
