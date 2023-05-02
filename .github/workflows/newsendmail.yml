@@ -2,9 +2,7 @@ name: Send email on workflow completion
 
 on:
   workflow_run:
-    workflows: newsendmail.yml
-    types:
-      - completed
+ 
 
 jobs:
   send-email:
