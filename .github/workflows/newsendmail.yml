@@ -1,32 +1,44 @@
-name: Send email to me
+name: Send email on workflow completion
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: newsendmail.yml
+    types:
+      - completed
+
 jobs:
   send-email:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Install Python and required packages
+        run: |
+          sudo apt-getnewsendmail.yml -y update
+          sudo apt-get -y install python3-pip
+          pip3 install jinja2
 
-    - name: Send email
-      uses: dawidd6/action-send-mail@v2
-      with:
-        server_address: smtp.gmail.com
-        server_port: 587
-        username: vijaybishtrkt
-        password: ${{ secrets.APPPASSWD }}
-        from: vijaybishtrkt@gmail.com
-        subject: My email subject
-        body: |
-          $(envsubst < email-template.html)
-        to: vijaybisht0103@gmail.com
-        content_type: text/html
-        convert_markdown: true
-        
-    - name: Substitute environment variables
-      run: |
-        sudo apt-get -y update
-        sudo apt-get -y install gettext
-        envsubst < email-template.html > email-template-envsubst.html
+      - name: Render HTML email
+        run: |
+          export GITHUB_REPOSITORY=${{ github.repository }}
+          export GITHUB_RUN_ID=${{ github.run_id }}
+          export GITHUB_RUN_NUMBER=${{ github.run_number }}
+          export GITHUB_WORKFLOW=${{ github.workflow }}
+          export JOB_STATUS=${{ job.status }}
+          cat email-template.html | envsubst > rendered-email-template.html
+          python3 render_template.py rendered-email-template.html
+
+      - name: Send email
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: vijaybishtrkt
+          password: ${{ secrets.APPPASSWD }}
+          from: vijaybishtrkt@gmail.com
+          to: vijaybisht0103@gmail.com
+          subject: Workflow run ${{ github.run_number }} result
+          body: |
+            $(cat final-email.html)
+
