@@ -41,7 +41,7 @@ jobs:
             Github Actions Build Number: ${{ github.run_number }}
             GitHub Branch Name: ${{ github.ref }}
             Commit Message: ${{ github.event.head_commit.message }}
+            Status: Success
           from: vijaybishtrkt@gmail.com
           to: vijaybishtrkt@gmail.com
-
 
