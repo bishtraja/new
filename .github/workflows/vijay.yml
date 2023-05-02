@@ -25,7 +25,7 @@ jobs:
           python render_template.py
 
       - name: Send Email
-        uses: dawidd6/action-send-mail@v3.3.1
+        uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 465
