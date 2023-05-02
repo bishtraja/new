@@ -8,6 +8,8 @@ on:
 jobs:
   send_email:
     runs-on: ubuntu-latest
+    env:
+      JOB_STATUS: ${{ job.status }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
