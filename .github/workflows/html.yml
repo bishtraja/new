@@ -13,10 +13,10 @@ jobs:
       with:
         server_address: smtp.gmail.com
         server_port: 587
-        username: vijaybishtrkt@gmail.com
-        password: ${{ secrets.APPPASSWD }}
-        to: vijaybisht0103@gmail.com
-        from: vijaybishtrkt@gmail.com
+        username: shivani.singh@opstree.com
+        password: rcbnxnnaftzexufd
+        to: shivani.singh@opstree.com
+        from: shivani.singh@opstree.com
         subject: 'Test email with HTML body'
         html_body: |
           <h2 style="color: pink;">Workflow Status: ${{ job.status }}</h2>
@@ -25,7 +25,7 @@ jobs:
           <br>
             Workflow Trigger: ${{ github.event_name }}
           <br>
-            Application health check URL: <a href="http://Qa.bigparser.com/api/v2/test_devops">Qa.bigparser.com/api/v2/test_devops</a>
+            Application health check URL: <a href="http://qa.bigparser.com/api/v2/test_devops">Qa.bigparser.com/api/v2/test_devops</a>
           </p>
 
 
