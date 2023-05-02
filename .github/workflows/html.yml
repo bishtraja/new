@@ -21,7 +21,39 @@ jobs:
         from: vijaybishtrkt@gmail.com
         subject: 'Test email with HTML body'
         html_body: |
-           '<h1 style="color: red;">Hello, World!</h1><p style="color: blue;">This is an email with an HTML body.</p>'
+          name: Send Email with HTML Body
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Send email
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: vijaybishtrkt@gmail.com
+        password: ${{ secrets.APPPASSWD }}
+        to: vijaybisht0103@gmail.com
+        from: vijaybishtrkt@gmail.com
+        subject: 'Test email with HTML body'
+        html_body: |
+            <p>
+              Workflow URL: <a href="${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}">${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}</a>
+              <br>
+              <h2>Workflow Status: ${{ job.status }}</h2>
+              <br>
+              Workflow Trigger: ${{ github.event_name }}
+            </p>
+
         content_type: html
         convert_markdown: true
+
+ 
 
