@@ -1,7 +1,7 @@
 name: Send email on workflow completion
 
 on:
-  workflow_run:
+  workflow_dispatch:
  
 
 jobs:
