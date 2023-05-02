@@ -1,56 +1,56 @@
 <!DOCTYPE html>
-           <html>
-           <head>
-           <style>
-           table {
-             font-family: arial, sans-serif;
-             border-collapse: collapse;
-             width: 100%;
-           }
-           
-           td, th {
-             border: 1px solid #dddddd;
-             text-align: left;
-             padding: 8px;
-           }
-           
-           tr:nth-child(even) {
-             background-color: #dddddd;
-           }
-           </style>
-           </head>
-           <body>
-           <h2 style="color: red;">Workflow Status: ${{ job.status }}</h2>
-           <p>
-            Workflow URL: <a href="${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}">${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}</a>
-           <br>
-            Workflow Trigger: ${{ github.event_name }}
-           <br>
-            Application health check URL: <a href="http://Qa.bigparser.com/api/v2/test_devops">Qa.bigparser.com/api/v2/test_devops</a>
-           </p>
-           <br> </br>
-           <br> </br>
-           
-           <h2>${{ github.workflow }} - Successful</h2>
-           
-           <table>
-             <tr>
-               <td>GitHub Repository</td>
-               <td>${{github.repository}}</td>
-             </tr>
-             <tr>
-               <td>Github Actions Build Number</td>
-               <td>${{ github.run_number }}</td>
-             </tr>
-             <tr>
-               <td>GitHub Branch Name</td>
-               <td>${{ github.ref_name }}</td>
-             </tr>
-             <tr>
-               <td>Commit Message</td>
-               <td>${{ github.event.head_commit.message }}</td>
-             </tr>
-           </table>
-           
-           </body>
-           </html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h2 style="color: red;">Workflow Status: {{ job_status }}</h2>
+<p>
+Workflow URL: <a href="{{ github.event.repository.html_url }}/actions/runs/{{ github.run_id }}">{{ github.event.repository.html_url }}/actions/runs/{{ github.run_id }}</a>
+<br>
+Workflow Trigger: {{ github.event_name }}
+<br>
+Application health check URL: <a href="http://Qa.bigparser.com/api/v2/test_devops">Qa.bigparser.com/api/v2/test_devops</a>
+</p>
+<br> </br>
+<br> </br>
+
+<h2>{{ github.workflow }} - Successful</h2>
+
+<table>
+ <tr>
+   <td>GitHub Repository</td>
+   <td>{{ github_repository }}</td>
+ </tr>
+ <tr>
+   <td>Github Actions Build Number</td>
+   <td>{{ github_run_number }}</td>
+ </tr>
+ <tr>
+   <td>GitHub Branch Name</td>
+   <td>{{ github_ref }}</td>
+ </tr>
+ <tr>
+   <td>Commit Message</td>
+   <td>{{ github_head_ref }}</td>
+ </tr>
+</table>
+
+</body>
+</html>
