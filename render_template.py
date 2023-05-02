@@ -1,16 +1,18 @@
 import os
 from jinja2 import Template
 
-# read the contents of the HTML file
-with open("index.html", "r") as file:
-    html_content = file.read()
+with open("email_template.html", "r") as f:
+    template = Template(f.read())
 
-# create a Jinja2 template from the HTML content
-template = Template(html_content)
+# Render the template with the desired variables
+rendered_template = template.render(
+    job_status=os.environ["JOB_STATUS"],
+    github_repository=os.environ["GITHUB_REPOSITORY"],
+    github_run_number=os.environ["GITHUB_RUN_NUMBER"],
+    github_ref=os.environ["GITHUB_REF"],
+    github_head_commit_message=os.environ["GITHUB_HEAD_COMMIT_MESSAGE"],
+)
 
-# render the template with the desired variables
-rendered_template = template.render(var1="value1", var2="value2")
-
-# write the rendered template back to the HTML file
-with open("index.html", "w") as file:
-    file.write(rendered_template)
+# Write the rendered template back to the file
+with open("email_template.html", "w") as f:
+    f.write(rendered_template)
