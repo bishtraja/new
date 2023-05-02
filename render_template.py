@@ -1,17 +1,20 @@
+import jinja2
 import os
-from jinja2 import Template
 
-with open("email-template.html", "r") as f:
-    template = Template(f.read())
+templateLoader = jinja2.FileSystemLoader(searchpath="./")
+templateEnv = jinja2.Environment(loader=templateLoader)
 
-# Render the template with the desired variables
-rendered_template = template.render(
-    github_repository=os.environ["GITHUB_REPOSITORY"],
-    github_run_number=os.environ["GITHUB_RUN_NUMBER"],
-    github_ref=os.environ["GITHUB_REF"],
-    github_head_commit_message=os.environ["GITHUB_HEAD_COMMIT_MESSAGE"],
-)
+templateVars = {
+    "github_workflow": os.environ["GITHUB_WORKFLOW"],
+    "github_repository": os.environ["GITHUB_REPOSITORY"],
+    "github_run_number": os.environ["GITHUB_RUN_NUMBER"],
+    "github_ref": os.environ["GITHUB_REF"],
+    "github_head_commit_message": os.environ.get("GITHUB_HEAD_COMMIT_MESSAGE", ""),
+}
 
-# Write the rendered template back to the file
-with open("email-template.html", "w") as f:
-    f.write(rendered_template)
+TEMPLATE_FILE = "email_template.html"
+template = templateEnv.get_template(TEMPLATE_FILE)
+outputText = template.render(templateVars)
+
+with open("email_body.txt", "w") as file:
+    file.write(outputText)
