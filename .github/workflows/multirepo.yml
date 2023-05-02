@@ -3,7 +3,7 @@ name: Checkout Two Repositories and Verify
 on:
   push:
     branches:
-      - main
+    
 
 jobs:
   checkout-repos:
