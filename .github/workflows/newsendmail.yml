@@ -1,26 +1,27 @@
 name: Send email to me
 
-on:
-  workflow_dispatch:
+on: 
+ workflow_dispatch:
+
 jobs:
-  send-email:
+  send_email:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-
-    - name: Send email
+    - name: Set up SMTP server
       uses: dawidd6/action-send-mail@v2
       with:
         server_address: smtp.gmail.com
-        server_port: 587
+        server_port: 465
         username: vijaybishtrkt
-        password: ${{ secrets.APPPASSWD }}
+        password: ${{secrets.APPPASSWD}}
         from: vijaybishtrkt@gmail.com
-        subject: My email subject
-        body: file://email-template.html
         to: vijaybisht0103@gmail.com
-        content_type: text/html
+        subject: Workflow run ${GITHUB_RUN_NUMBER} result
+        body: |
+          <p><a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">(Click above to view the workflow run)</a></p>
+          <p>Job # ${GITHUB_RUN_NUMBER} of workflow "${{ github.workflow }}" of ${{ github.repository }} is ${{ job.status }}.</p>
+ 
         
 
