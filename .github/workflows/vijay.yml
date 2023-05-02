@@ -8,8 +8,6 @@ on:
 jobs:
   send_email:
     runs-on: ubuntu-latest
-    env:
-      JOB_STATUS: ${{ job.status }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -27,6 +25,7 @@ jobs:
           python render_template.py
 
       - name: Send Email
+        id: send_email
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -43,6 +42,7 @@ jobs:
             Github Actions Build Number: ${{ github.run_number }}
             GitHub Branch Name: ${{ github.ref }}
             Commit Message: ${{ github.event.head_commit.message }}
+            Status: ${{ steps.send_email.status }}
           from: vijaybishtrkt@gmail.com
           to: vijaybishtrkt@gmail.com
 
