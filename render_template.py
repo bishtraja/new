@@ -1,13 +1,16 @@
-import jinja2
-import sys
+import os
+from jinja2 import Template
 
-def main():
-    template_path = sys.argv[1]
-    with open(template_path, 'r') as f:
-        template = jinja2.Template(f.read())
-    rendered_template = template.render()
-    with open('final-email.html', 'w') as f:
-        f.write(rendered_template)
+# read the contents of the HTML file
+with open("index.html", "r") as file:
+    html_content = file.read()
 
-if __name__ == '__main__':
-    main()
+# create a Jinja2 template from the HTML content
+template = Template(html_content)
+
+# render the template with the desired variables
+rendered_template = template.render(var1="value1", var2="value2")
+
+# write the rendered template back to the HTML file
+with open("index.html", "w") as file:
+    file.write(rendered_template)
