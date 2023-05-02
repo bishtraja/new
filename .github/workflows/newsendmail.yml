@@ -13,7 +13,7 @@ jobs:
 
       - name: Install Python and required packages
         run: |
-          sudo apt-getnewsendmail.yml -y update
+          sudo apt-get -y update
           sudo apt-get -y install python3-pip
           pip3 install jinja2
 
