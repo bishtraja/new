@@ -9,9 +9,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Read email template
-      id: email-template
-      run: echo "::set-output name=content::$(cat email-template.html)"
 
     - name: Send email
       uses: dawidd6/action-send-mail@v2
@@ -22,7 +19,7 @@ jobs:
         password: ${{ secrets.APPPASSWD }}
         from: vijaybishtrkt@gmail.com
         subject: My email subject
-        body: ${{ steps.email-template.outputs.content }}
+        html_body: file://email-template.html
         to: vijaybisht0103@gmail.com
         content_type: text/html
 
