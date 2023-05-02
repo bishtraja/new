@@ -10,7 +10,7 @@ rendered_template = template.render(
     github_repository=os.environ["GITHUB_REPOSITORY"],
     github_run_number=os.environ["GITHUB_RUN_NUMBER"],
     github_ref=os.environ["GITHUB_REF"],
-    github_head_commit_message=os.environ["GITHUB_HEAD_COMMIT_MESSAGE"],
+    github_head_ref=os.environ["GITHUB_HEAD_REF"],
 )
 
 # Write the rendered template back to the file
