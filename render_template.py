@@ -12,7 +12,7 @@ templateVars = {
     "github_head_commit_message": os.environ.get("GITHUB_HEAD_COMMIT_MESSAGE", ""),
 }
 
-TEMPLATE_FILE = "email_template.html"
+TEMPLATE_FILE = "email-template.html"
 template = templateEnv.get_template(TEMPLATE_FILE)
 outputText = template.render(templateVars)
 
