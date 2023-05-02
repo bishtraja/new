@@ -1,7 +1,5 @@
 on:
-  push:
     
-
 jobs:
   send_email:
     runs-on: ubuntu-latest
